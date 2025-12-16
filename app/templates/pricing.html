@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Pricing{% endblock %}
+
+{% block content %}
+<h1 class="mb-5 text-center">Flexible SaaS Plans</h1>
+<p class="lead text-center">Subscription tiers with feature comparison and limits per website / user.</p>
+
+<div class="row">
+    {% set tiers = [
+        ('Basic', '5 Websites', '10 Audits/Month', 29, ['Technical', 'SEO', 'Content']),
+        ('Professional', '25 Websites', 'Unlimited Audits', 99, ['All Core Audits', 'UX/UI', 'Security']),
+        ('Enterprise', 'Unlimited', 'Unlimited Audits', 499, ['Full Compliance', 'Admin Tools', 'Dedicated Support'])
+    ] %}
+    {% for title, websites, limits, price, features in tiers %}
+    <div class="col-md-4">
+        <div class="card text-center mb-4 shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0 fw-normal">{{ title }}</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">${{ price }} <small class="text-muted fw-light">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4 text-start mx-auto" style="max-width: 250px;">
+                    <li><i class="bi bi-check-lg text-success"></i> {{ websites }} limit</li>
+                    <li><i class="bi bi-check-lg text-success"></i> {{ limits }}</li>
+                    <li><i class="bi bi-check-lg text-success"></i> Automated Reporting</li>
+                    {% for feature in features %}
+                        <li><i class="bi bi-check-lg text-success"></i> {{ feature }}</li>
+                    {% endfor %}
+                    <li><i class="bi bi-person-check-fill"></i> Role-Based Access (Standard User)</li>
+                </ul>
+                <a href="{{ url_for('register') }}" class="btn btn-lg btn-block btn-outline-primary">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
