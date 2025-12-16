@@ -1,0 +1,20 @@
+# requirements.txt
+# Web Framework & Server
+Flask>=2.3.0,<3.0
+gunicorn>=20.1.0,<22.0
+
+# Database & ORM
+Flask-SQLAlchemy
+psycopg2-binary     # PostgreSQL driver
+SQLAlchemy
+
+# Security & Utilities
+Flask-Bcrypt        # For password hashing
+Flask-Login         # For user session management
+Flask-Mail          # For email verification and reports
+python-dotenv       # For local environment variables
+
+# Background Tasks & Reporting
+rq>=1.15.0,<2.0      # Redis Queue
+rq-scheduler         # For scheduling reports
+weasyprint          # For generating PDF reports (requires cairo libraries)
