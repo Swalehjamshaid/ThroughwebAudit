@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="card p-5">
+            {% if success %}
+            <h1 class="text-success">Email Verified!</h1>
+            <p class="lead">Your account is now active. You may now log in to access the full dashboard.</p>
+            <a href="{{ url_for('login') }}" class="btn btn-success mt-3">Go to Login</a>
+            {% else %}
+            <h1 class="text-danger">Verification Failed</h1>
+            <p class="lead">{{ message }}</p>
+            {% if can_resend %}
+            <form method="POST" action="{{ url_for('resend_verification') }}">
+                <input type="hidden" name="email" value="{{ email }}">
+                <button type="submit" class="btn btn-warning mt-3">Resend Verification Email</button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
