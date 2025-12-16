@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4 text-danger">Admin Dashboard - System Control</h1>
+
+{% if not current_user.is_admin %}
+    <div class="alert alert-danger text-center">
+        <h2 class="alert-heading">Access Denied (403)</h2>
+        <p>You do not have permission to view this page. This area is reserved for system administrators.</p>
+    </div>
+{% else %}
+    <p class="lead">System Overview, Audit Usage Statistics, and Control Panels.</p>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">User Management</h5>
+                    <p class="card-text">Create, edit, deactivate users, and assign roles.</p>
+                    <a href="{{ url_for('admin_users') }}" class="btn btn-primary">Manage Users</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Audit Configuration</h5>
+                    <p class="card-text">Enable/disable audit attributes and set scoring rules.</p>
+                    <a href="{{ url_for('admin_audit_settings') }}" class="btn btn-primary">Configure Audits</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">System Settings & DB Integration</h5>
+                    <p class="card-text">Manage database connections and security settings (Railway DB integration).</p>
+                    <a href="{{ url_for('admin_settings') }}" class="btn btn-primary">System Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Audit Usage Statistics</h2>
+    <div class="card p-4">
+        <p>Placeholder for charts showing audits run, active users, and worker queue size.</p>
+    </div>
+{% endif %}
+{% endblock %}
