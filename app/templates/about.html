@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Our Vision and Audit Methodology</h1>
+<p class="lead">We provide deep, actionable insights to help you achieve digital excellence.</p>
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h3>Product Vision and Purpose</h3>
+        <p>To be the leading, centralized platform for continuous web health monitoring and compliance adherence, simplifying complex audit data into clear, prioritized actions. Our purpose is to democratize high-quality web auditing.</p>
+    </div>
+    <div class="col-md-6">
+        <h3>Audit Methodology</h3>
+        <p>Our audits use proprietary algorithms combined with industry-standard checks (Core Web Vitals, WCAG, OWASP) across 45+ attributes, ensuring a holistic view of website health. Each score is weighted based on business impact and priority.</p>
+    </div>
+</div>
+
+<h3 class="mt-5">Trust and Compliance Highlights</h3>
+<p>We follow industry best practices for security and data privacy, maintaining strict compliance standards for all data synchronization, including Railway database integration. We offer comprehensive Compliance & Legal Review as a core part of our service.</p>
+<a href="{{ url_for('features') }}" class="btn btn-primary mt-3">Explore Detailed Methodology</a>
+{% endblock %}
