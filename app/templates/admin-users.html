@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}User Management{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="mb-4">User Management</h1>
+<p class="lead">Create, edit, deactivate users, and manage role assignments.</p>
+
+<a href="#" class="btn btn-success mb-3">Create New User</a>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td><span class="badge bg-{{ 'danger' if user.is_admin else 'primary' }}">{{ 'Admin' if user.is_admin else 'Standard' }}</span></td>
+                <td><span class="badge bg-{{ 'success' if user.is_verified else 'warning' }}">{{ 'Verified' if user.is_verified else 'Pending' }}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-info text-white">Edit</button>
+                    <button class="btn btn-sm btn-{{ 'secondary' if user.is_verified else 'warning' }}">Deactivate</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
