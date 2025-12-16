@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Our Comprehensive Audit Methodology</h1>
+<p class="lead">We cover 45+ web audit attributes across all critical dimensions.</p>
+
+{% set categories = [
+    ('Technical Audit', 'Site speed, Mobile responsiveness, Indexing, and URL structure.'),
+    ('SEO Audit', 'Keyword analysis, On-page optimization, Schema, and Backlink overview.'),
+    ('Content Quality Audit', 'Readability, Content freshness, User intent, and CTA effectiveness.'),
+    ('UX / UI Audit', 'Navigation structure, Accessibility (WCAG compliance), and Conversion flow.'),
+    ('Security Audit', 'SSL/HTTPS status, Vulnerability assessment, and Malware detection.'),
+    ('Compliance & Legal Review', 'GDPR, Privacy policy, and Consent management.')
+] %}
+
+{% for title, desc in categories %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h3 class="card-title">{{ title }}</h3>
+        <p class="card-text">{{ desc }}</p>
+        <a href="{{ url_for('register') }}" class="btn btn-sm btn-outline-primary">Start Auditing This Category</a>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
