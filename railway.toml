@@ -1,0 +1,29 @@
+# railway.toml
+
+project = "The-Web-for-Audit"
+
+[build]
+# CRITICAL FIX: Runs the CLI command to CREATE TABLES before starting Gunicorn.
+start = "flask db_cli create_all && gunicorn app.app.app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 300"
+
+[services]
+
+# ---------------------------
+# Worker service (RQ)
+# ---------------------------
+[services.worker]
+build = "."
+run = "rq worker audit_tasks" 
+env = [
+    { key = "PYTHONUNBUFFERED", value = "1" }
+]
+
+# ---------------------------
+# Scheduler service (RQ)
+# ---------------------------
+[services.scheduler]
+build = "."
+run = "python app/scheduler.py"
+env = [
+    { key = "PYTHONUNBUFFERED", value = "1" }
+]
