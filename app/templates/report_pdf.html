@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Web Audit Report - {{ report.website_url }}</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 0; }
+        .page { page-break-after: always; padding: 50px; }
+        .header { background-color: #007bff; color: white; padding: 20px; text-align: center; }
+        .score-box { font-size: 24px; font-weight: bold; padding: 10px; border-radius: 5px; display: inline-block; }
+        .score-success { background-color: #28a745; color: white; }
+        .score-warning { background-color: #ffc107; color: #333; }
+        .score-danger { background-color: #dc3545; color: white; }
+        h3 { border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-top: 30px; }
+        .metric-item { margin-bottom: 10px; border-left: 3px solid #eee; padding-left: 10px; }
+        .status-success { color: #28a745; }
+        .status-warning { color: #ffc107; }
+        .status-danger { color: #dc3545; }
+        .footer { text-align: center; font-size: 10px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<div class="page cover-page">
+    <div class="header">
+        <h1>Web Audit Report</h1>
+        <h2>{{ report.website_url }}</h2>
+        <p>Generated: {{ report.created_at.strftime('%Y-%m-%d') }}</p>
+    </div>
+    
+    <h3 style="margin-top: 50px;">Overall Health Score</h3>
+    {% set overall_score = data.scores.overall_score | default(0) %}
+    {% set score_class = 'score-success' if overall_score > 80 else 'score-warning' if overall_score > 50 else 'score-danger' %}
+    <p class="{{ score_class }} score-box">{{ overall_score }}%</p>
+    
+    <h3>Key Findings & Priority Recommendations</h3>
+    <p>This report summarizes findings across 7 critical dimensions and 45+ audit attributes.</p>
+    <ul>
+        <li>**Critical Issues:** (Placeholder for summary of red-flag items.)</li>
+        <li>**Key Strengths:** (Placeholder for summary of excellent items.)</li>
+        <li>**Top Recommendation:** (Placeholder for 1-2 urgent actions.)</li>
+    </ul>
+
+    <div class="footer">
+        Confidential Document. Compliance and Security Check Performed.
+    </div>
+</div>
+
+{% for category, cat_data in data.categories.items() %}
+<div class="page">
+    <h3>{{ category }} Audit</h3>
+    <p class="text-muted">{{ cat_data.description }}</p>
+    
+    {% for item in cat_data.items %}
+        {% set status_class = 'status-success' if item.status == 'Excellent' else 'status-warning' if item.status == 'Good' or item.status == 'Fair' else 'status-danger' %}
+        <div class="metric-item">
+            <span class="{{ status_class }}">{{ item.status }}</span> &mdash; 
+            <strong>{{ item.name }}</strong>
+            <p style="font-size: 11px; margin-top: 3px;">Recommendation: {{ item.suggestion }}</p>
+        </div>
+    {% endfor %}
+    
+    <div class="footer">
+        Page {{ loop.index + 1 }} | {{ category }} Findings
+    </div>
+</div>
+{% endfor %}
+
+</body>
+</html>
