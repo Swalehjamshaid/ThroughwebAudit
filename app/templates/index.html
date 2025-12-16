@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 text-center">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Comprehensive Web Audit Platform</h1>
+        <p class="col-md-12 fs-4">Audit, monitor, and improve your websites across 7 dimensions with 45+ attributes.</p>
+        <div class="mt-4">
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-3">Start Your Free Audit Trial</a>
+            <a href="{{ url_for('features') }}" class="btn btn-outline-secondary btn-lg">View Key Features</a>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center mb-5">
+    {% set features = [
+        ('wrench-adjustable', 'Technical Foundation', 'Ensure flawless performance and indexing.'),
+        ('search', 'SEO & Visibility', 'Dominate search results with optimized content.'),
+        ('shield-lock', 'Security & Compliance', 'Identify vulnerabilities and legal risks.')
+    ] %}
+    {% for icon, title, desc in features %}
+    <div class="col-md-4">
+        <h2 class="h4">{{ title }}</h2>
+        <p>{{ desc }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3 class="h4">SaaS-Based Multi-User Access</h3>
+        <p>Designed for organizations and agencies to manage multiple clients and websites from one centralized dashboard.</p>
+    </div>
+    <div class="col-md-6">
+        <h3 class="h4">Automated Reporting</h3>
+        <p>Receive scheduled weekly/monthly reports and instant alerts on critical performance thresholds.</p>
+    </div>
+</div>
+{% endblock %}
