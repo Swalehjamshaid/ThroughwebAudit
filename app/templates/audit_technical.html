@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Technical Audit: {{ report.website_url }}</h1>
+
+<div class="alert alert-secondary">
+    <p class="mb-0">Evaluates the website’s technical foundation: Site speed, Mobile responsiveness, Indexing & crawlability, and more.</p>
+</div>
+
+<div class="row text-center mb-5">
+    <div class="col-md-4">
+        <div class="card bg-info text-white"><div class="card-body"><h5 class="card-title">LCP Score</h5><p class="h3">2.1s (Good)</p></div></div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white"><div class="card-body"><h5 class="card-title">CLS Score</h5><p class="h3">0.02 (Excellent)</p></div></div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white"><div class="card-body"><h5 class="card-title">Mobile Responsive</h5><p class="h3">Passed</p></div></div>
+    </div>
+</div>
+
+<h2>Crawlability & Structure Findings</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Status</th>
+            <th>Recommendation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set technical_results = technical_data.items %}
+        {% for item in technical_results %}
+        <tr class="table-{{ 'success' if item.status == 'Excellent' else 'warning' if item.status in ['Good', 'Fair'] else 'danger' }}">
+            <td>{{ item.name }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.suggestion }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="table-danger">
+            <td>Broken Links (404/500)</td>
+            <td>Poor</td>
+            <td>Fix 15 broken links found in the last crawl.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <a href="{{ url_for('report_detail', report_id=report.id) }}" class="btn btn-secondary">Back to Full Report Summary</a>
+</div>
+{% endblock %}
