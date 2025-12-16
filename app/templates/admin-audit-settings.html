@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Audit Configuration{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="mb-4">Audit Configuration</h1>
+<p class="lead">Enable/disable audit attributes and set threshold and scoring rules.</p>
+
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-dark text-white">Audit Attributes (45+ metrics)</div>
+    <div class="card-body">
+        <form>
+            <h3 class="h5">Technical Audit Settings</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked id="checkLCP">
+                <label class="form-check-label" for="checkLCP">Check Largest Contentful Paint (LCP)</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkHTTPS">
+                <label class="form-check-label" for="checkHTTPS">Check HSTS (HTTP Strict Transport Security)</label>
+            </div>
+            
+            <h3 class="h5 mt-4">Scoring Rules</h3>
+            <div class="mb-3">
+                <label for="warningThreshold" class="form-label">Warning Threshold (%)</label>
+                <input type="number" class="form-control" id="warningThreshold" value="65">
+                <div class="form-text">If overall score drops below this, trigger a WARNING alert.</div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Save Configuration</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
