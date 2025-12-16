@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}System Settings{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="mb-4">System Settings</h1>
+<p class="lead">Manage database connections, security, and backup settings (Railway DB integration).</p>
+
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-dark text-white">Database & Worker Status</div>
+    <div class="card-body">
+        <p><strong>PostgreSQL (Railway DB Integration):</strong> <span class="badge bg-success">Connected</span></p>
+        <p><strong>Redis/RQ Worker:</strong> <span class="badge bg-success">Active (3 Workers)</span></p>
+        <p><strong>Last Backup:</strong> 2025-12-15 02:00 UTC</p>
+        
+        <button class="btn btn-sm btn-warning">Trigger Manual Backup</button>
+        <button class="btn btn-sm btn-danger">Restart Worker Queue</button>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-dark text-white">Security Controls</div>
+    <div class="card-body">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="force2FA" checked>
+            <label class="form-check-label" for="force2FA">Enforce Two-Factor Authentication (2FA) for Admins</label>
+        </div>
+        <div class="form-check form-switch mt-2">
+            <input class="form-check-input" type="checkbox" id="maintenanceMode">
+            <label class="form-check-label" for="maintenanceMode">Activate Maintenance Mode (Uses maintenance.html)</label>
+        </div>
+    </div>
+</div>
+{% endblock %}
